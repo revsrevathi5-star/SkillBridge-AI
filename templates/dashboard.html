@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>SkillBridge AI Dashboard</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+
+    <nav class="navbar">
+        <div class="logo">SkillBridge AI</div>
+
+        <div class="nav-links">
+            <a href="{{ url_for('dashboard') }}">Dashboard</a>
+            <a href="{{ url_for('analysis') }}">AI Analysis</a>
+            <a href="{{ url_for('logout') }}">Logout</a>
+            <a href="{{ url_for('history') }}">My Analysis History</a>
+        </div>
+    </nav>
+
+    <main class="container">
+
+        <section class="welcome-section">
+            <h1>Hello, {{ user.username }}!</h1>
+            <p>
+                Welcome to your intelligent career development platform.
+                Discover your skills, identify gaps and build your future.
+            </p>
+        </section>
+
+        <h2 class="section-title">Your Career Overview</h2>
+
+        <section class="stats-grid">
+
+            <div class="card">
+                <h3>Resume Analysis</h3>
+                <h2>Ready</h2>
+                <p>Analyze your resume</p>
+            </div>
+
+            <div class="card">
+                <h3>Skill Development</h3>
+                <h2>AI</h2>
+                <p>Discover missing skills</p>
+            </div>
+
+            <div class="card">
+                <h3>Career Roadmap</h3>
+                <h2>Start</h2>
+                <p>Plan your learning journey</p>
+            </div>
+
+        </section>
+
+        <h2 class="section-title">Explore Features</h2>
+
+        <section class="feature-grid">
+
+            <div class="feature-card">
+                <h3>📄 Resume Analyzer</h3>
+                <p>Identify technical skills from your resume.</p>
+                <a class="btn" href="{{ url_for('analysis') }}">
+                    Analyze Resume
+                </a>
+            </div>
+
+            <div class="feature-card">
+                <h3>🤖 AI Skill Gap Analyzer</h3>
+                <p>Compare your existing skills with job requirements.</p>
+                <a class="btn" href="{{ url_for('analysis') }}">
+                    Start Analysis
+                </a>
+            </div>
+
+            <div class="feature-card">
+                <h3>📚 Learning Roadmap</h3>
+                <p>Get recommendations based on missing skills.</p>
+                <a class="btn btn-secondary" href="{{ url_for('analysis') }}">
+                    View Recommendations
+                </a>
+            </div>
+
+            <div class="feature-card">
+                <h3>🎯 Career Growth</h3>
+                <p>Understand the skills needed for your target role.</p>
+                <a class="btn btn-secondary" href="{{ url_for('analysis') }}">
+                    Explore Careers
+                </a>
+            </div>
+
+        </section>
+
+    </main>
+
+    <footer class="footer">
+        SkillBridge AI | Smart Career & Skill Gap Analyzer
+    </footer>
+
+</body>
+
+</html>

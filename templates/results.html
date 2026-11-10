@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analysis Results | SkillBridge AI</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+
+    <nav class="navbar">
+        <div class="logo">SkillBridge AI</div>
+        <div class="nav-links">
+            <a href="{{ url_for('dashboard') }}">Dashboard</a>
+            <a href="{{ url_for('history') }}">History</a>
+            <a href="{{ url_for('logout') }}">Logout</a>
+        </div>
+    </nav>
+
+    <main class="container">
+        <section class="form-card">
+            <h1>Your Skill Analysis</h1>
+            <p>Here is how your resume compares with the job requirements.</p>
+
+            <div class="card">
+                <h2>Overall Skill Match</h2>
+                <h1>{{ result.match_percentage }}%</h1>
+
+                <div class="progress-track">
+                    <div class="progress-fill" style="width: {{ result.match_percentage }}%">
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <h2>Matched Skills</h2>
+                {% if result.matched_skills %}
+                <div class="skill-list">
+                    {% for skill in result.matched_skills %}
+                    <span class="skill-tag">{{ skill }}</span>
+                    {% endfor %}
+                </div>
+                {% else %}
+                <p>No matching skills detected.</p>
+                {% endif %}
+            </div>
+
+            <div class="card">
+                <h2>Skills to Improve</h2>
+                {% if result.missing_skills %}
+                <div class="skill-list">
+                    {% for skill in result.missing_skills %}
+                    <span class="missing-tag">{{ skill }}</span>
+                    {% endfor %}
+                </div>
+                {% else %}
+                <p>All detected job skills are present in your resume!</p>
+                {% endif %}
+            </div>
+
+            <div class="card">
+                <h2>Your Learning Roadmap</h2>
+
+                {% if roadmap %}
+                {% for item in roadmap %}
+                <div class="roadmap-item">
+                    <h3>{{ loop.index }}. {{ item.skill }}</h3>
+                    <p>{{ item.recommendation }}</p>
+                </div>
+                {% endfor %}
+                {% else %}
+                <p>No additional skills suggested.</p>
+                {% endif %}
+            </div>
+
+            <a href="{{ url_for('analysis') }}" class="btn">
+                Analyze Another Resume
+            </a>
+
+            <a href="{{ url_for('history') }}" class="btn btn-secondary">
+                View Analysis History
+            </a>
+        </section>
+    </main>
+
+</body>
+
+</html>

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analysis History | SkillBridge AI</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+
+    <nav class="navbar">
+        <div class="logo">SkillBridge AI</div>
+        <div class="nav-links">
+            <a href="{{ url_for('dashboard') }}">Dashboard</a>
+            <a href="{{ url_for('analysis') }}">New Analysis</a>
+            <a href="{{ url_for('logout') }}">Logout</a>
+        </div>
+    </nav>
+
+    <main class="container">
+        <h1>Previous Analyses</h1>
+        <p>Review your saved resume skill comparisons.</p>
+
+        {% if records %}
+        {% for match, job_title, company in records %}
+        <div class="card">
+            <h3>{{ job_title }}</h3>
+            <p>{{ company }}</p>
+
+            <h2>{{ match.match_score }}%</h2>
+            <p>Skill Match Percentage</p>
+
+            <p>
+                <strong>Matched skills:</strong>
+                {{ match.matched_skills or "None" }}
+            </p>
+
+            <p>
+                <strong>Missing skills:</strong>
+                {{ match.missing_skills or "None" }}
+            </p>
+        </div>
+        {% endfor %}
+        {% else %}
+        <div class="card">
+            <h3>No analysis history found.</h3>
+            <p>Upload your resume to create your first analysis.</p>
+            <a href="{{ url_for('analysis') }}" class="btn">
+                Start Analysis
+            </a>
+        </div>
+        {% endif %}
+
+        <a href="{{ url_for('dashboard') }}" class="btn">
+            Back to Dashboard
+        </a>
+    </main>
+
+</body>
+
+</html>
